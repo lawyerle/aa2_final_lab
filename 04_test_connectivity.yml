@@ -2,25 +2,31 @@
 - name: Building inventory
   hosts: localhost
   connection: local
+  vars:
+    guid: "{{ lookup('ENV', 'GUID') }}"
+    internal_domain: "{{ guid }}.internal"
   
   tasks:
     - name: Fetch Instance Info
       os_server_info:
-        region_name: "{{ openstack_region | default('regionOne') }}"
+        cloud: "{{ guid }}-project"
       register: r_instances
 
     - name: Add host(s) to inventory
       add_host:
-        name: "{{ __instance.private_v4 }}"
+        host: "{{ __instance.name }}.{{ internal_domain }}"
+        ansible_host: "{{ __instance.private_v4 }}"
+        ssh_private_key_file: "~/.ssh/{{ guid }}key.pem"
         group:
           - "{{ __instance.metadata.AnsibleGroup }}"
+      when: __instance.metadata.AnsibleGroup == "osp_instances"
       loop: "{{ r_instances.openstack_servers }}"
       loop_control:
         loop_var: __instance
 
 - name: Test connectivity
-  hosts: load_balancers,app_servers,database_servers
-  gather_facts: false
+  hosts: osp_instances 
+#  gather_facts: false
   tasks:
     - name: test ping
       ping:
