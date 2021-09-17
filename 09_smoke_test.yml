@@ -25,11 +25,12 @@
   tags:
     - smoketest  
   tasks:
- 
+    - debug:
+        msg: "{{ hostvars['frontend1'].ansible_host }}"  
     - name: Check webserver for correct response
       uri:
 #        url: "http://frontend1/ping"
-        url: "http://{{ groups.load_balancers[0] }}/ping"
+        url: "http://{{ hostvars['frontend1'].ansible_host }}/ping"
         return_content: yes
       until: '"alive" in result.content'
       retries: 10
