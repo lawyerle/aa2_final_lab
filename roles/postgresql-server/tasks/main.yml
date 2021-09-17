@@ -3,6 +3,7 @@
 - name: Install Postgres packages
   package:
     name: "{{ __package }}"
+    disable_gpg_check: true
     state: present
   loop: 
     - "{{ postgres_rhel8_repo }}"        
