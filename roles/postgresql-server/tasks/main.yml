@@ -1,5 +1,6 @@
 ---
 # tasks file for roles/postgresql-server
+- command: dnf -y module disable postgresql
 - name: Install Postgres packages
   package:
     name: "{{ __package }}"
