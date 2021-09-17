@@ -5,8 +5,8 @@ instances:
     keypair: bce4-keypair
     image: rhel-8.3
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
-    # security_group: bce4-HostSG
-    security_group: app-servers
+    security_group: bce4-HostSG
+    # security_group: app-servers
     internal_network: bce4-dev-network
     metadata:
       AnsibleGroup: osp_instances
@@ -16,7 +16,7 @@ instances:
     keypair: bce4-keypair
     image: rhel-8.3
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
-    security_group: app-servers
+    security_group: bce4-HostSG
     internal_network: bce4-dev-network
     metadata:
       AnsibleGroup: osp_instances
@@ -26,7 +26,7 @@ instances:
     keypair: bce4-keypair
     image: rhel-8.3
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
-    security_group: frontend_servers
+    security_group: bce4-HostSG
     internal_network: bce4-dev-network
     metadata:
       AnsibleGroup: osp_instances
@@ -36,7 +36,7 @@ instances:
     keypair: bce4-keypair
     image: rhel-8.3
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
-    security_group: db_servers
+    security_group: bce4-HostSG
     internal_network: bce4-dev-network
     metadata:
       AnsibleGroup: osp_instances
