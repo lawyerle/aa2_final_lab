@@ -1,0 +1,19 @@
+---
+- name: Deploy, configure, and populate Postgres 12
+  hosts: database_servers
+  become: true
+  gather_facts: false
+  tags:
+    - database_servers
+
+  tasks:
+    - name: Install firewall
+      include_role: 
+        name: firewall
+      vars: 
+        firewall_services:
+          - postgresql
+
+    - name: Install postresql server
+      include_role:
+        name: postgresql-server
