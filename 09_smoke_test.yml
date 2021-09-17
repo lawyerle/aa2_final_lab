@@ -6,9 +6,6 @@
     - smoketest  
 
   tasks:
-
-    - debug:
-        msg: "{{ groups.database_servers[0] }}, {{ groups.app_servers[0] }}"
     - name: Smoketest Postgres database
       postgresql_ping:
         db: flask_db
