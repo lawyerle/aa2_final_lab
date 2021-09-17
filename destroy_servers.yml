@@ -1,11 +1,17 @@
 ---
 - hosts: localhost
   connection: local
+  vars:
+    GUID: "bce4"
+
   tasks:
-  - name: Delete server instances
-    os_server:
+    - name: Include variables
+      include_vars: instances_vars.yml
+
+    - name: Delete server instances
+      os_server:
         name: "{{ __openstack_server.instance_name }}"
         state: absent
-    loop: "{{ openstack_servers }}"
-    loop_control:
+      loop: "{{ openstack_servers }}"
+      loop_control:
         loop_var: __openstack_server
