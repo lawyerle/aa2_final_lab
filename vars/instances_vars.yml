@@ -1,6 +1,6 @@
 ---
 instances:
-  - name: server1
+  - name: app1
     keypair: bce4-keypair
     image: rhel-8.3
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
@@ -9,7 +9,25 @@ instances:
     metadata:
       AnsibleGroup: osp_instances
       deployment_name: dev
-  - name: server2
+  - name: app2
+    keypair: bce4-keypair
+    image: rhel-8.3
+    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
+    security_group: bce4-HostSG
+    internal_network: bce4-dev-network
+    metadata:
+      AnsibleGroup: osp_instances
+      deployment_name: dev
+  - name: frontend1
+    keypair: bce4-keypair
+    image: rhel-8.3
+    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
+    security_group: bce4-HostSG
+    internal_network: bce4-dev-network
+    metadata:
+      AnsibleGroup: osp_instances
+      deployment_name: dev
+  - name: appdb1
     keypair: bce4-keypair
     image: rhel-8.3
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
