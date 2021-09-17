@@ -1,4 +1,0 @@
----
-- import_playbook: 01_osp_infra_provision.yml
-- import_playbook: 02_in-memory-inventory.yml
-- import_playbook: 03_osp_infra_configure.yml
