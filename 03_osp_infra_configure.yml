@@ -1,4 +1,7 @@
 ---
+- name: import dynamic inventory
+  import_playbook: in-memory-inventory.yml
+
 - name: Play for registering  openstack instances  
   hosts: all
   become: yes

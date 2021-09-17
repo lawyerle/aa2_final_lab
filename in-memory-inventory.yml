@@ -30,13 +30,3 @@
   gather_facts: false
   tasks:
     - debug: var=groups
-
-- name: Verify Openstack Instances
-  hosts: osp_instances
-  tasks:
-    - name: Verify connectivity
-      ping:
-      register: output
-
-    - debug:
-        msg: "{{ output }}"
