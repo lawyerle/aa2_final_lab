@@ -1,0 +1,18 @@
+---
+- name: Manage OpenStack Servers
+  hosts: localhost 
+  connection: local
+  gather_facts: false
+  become: false
+  vars:
+    GUID: "bce4"
+
+  tasks:
+    - name: Include variables
+      include_vars: instances_vars.yml
+
+    - name: provison osp instances
+      include_role:
+        name: openstack_manage_servers
+  
+...

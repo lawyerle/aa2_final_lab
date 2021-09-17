@@ -1,43 +1,42 @@
----
-instances:
-  - name: app1.bce4.internal
-    cloud: bce4-project
-    keypair: bce4-keypair
-    image: rhel-8.3
-    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
-    security_group: bce4-HostSG
-    # security_group: app-servers
-    internal_network: bce4-dev-network
-    metadata:
-      AnsibleGroup: osp_instances
-      deployment_name: dev
-  - name: app2.bce4.internal
-    cloud: bce4-project
-    keypair: bce4-keypair
-    image: rhel-8.3
-    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
-    security_group: bce4-HostSG
-    internal_network: bce4-dev-network
-    metadata:
-      AnsibleGroup: osp_instances
-      deployment_name: dev
-  - name: frontend1.bce4.internal
-    cloud: bce4-project
-    keypair: bce4-keypair
-    image: rhel-8.3
-    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
-    security_group: bce4-HostSG
-    internal_network: bce4-dev-network
-    metadata:
-      AnsibleGroup: osp_instances
-      deployment_name: dev
-  - name: appdb1.bce4.internal
-    cloud: bce4-project
-    keypair: bce4-keypair
-    image: rhel-8.3
-    flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
-    security_group: bce4-HostSG
-    internal_network: bce4-dev-network
-    metadata:
-      AnsibleGroup: osp_instances
-      deployment_name: dev
+openstack_security_groups: []
+openstack_server_state: present
+openstack_cloud: "{{GUID}}-project"
+
+openstack_servers:
+
+  - instance_name: app1
+    AnsibleGroup: app_servers 
+    deployment: prod
+    security_group_name: "{{GUID}}-HostSG"
+    image: "{{ _server_image | default('rhel-8.3') }}"
+    openstack_cloud: "{{GUID}}-project"
+    flavor: GLOBAL-CPU_4_Memory_32768_Disk_60_flavor
+    key_name: "{{GUID}}-keypair"
+    network: "{{GUID}}-prod-network"
+  - instance_name: app2
+    AnsibleGroup: app_servers 
+    deployment: prod
+    security_group_name: "{{GUID}}-HostSG"
+    image: "{{ _server_image | default('rhel-8.3') }}"
+    openstack_cloud: "{{GUID}}-project"
+    flavor: GLOBAL-CPU_4_Memory_32768_Disk_60_flavor
+    key_name: "{{GUID}}-keypair"
+    network: "{{GUID}}-prod-network"
+  - instance_name: appdb1
+    AnsibleGroup: database_servers
+    deployment: prod
+    security_group_name: "{{GUID}}-HostSG"
+    image: "{{ _server_image | default('rhel-8.3') }}"
+    openstack_cloud: "{{GUID}}-project"
+    flavor: GLOBAL-CPU_4_Memory_32768_Disk_60_flavor
+    key_name: "{{GUID}}-keypair"
+    network: "{{GUID}}-prod-network"
+  - instance_name: frontend1 
+    AnsibleGroup: load_balancers
+    deployment: prod
+    security_group_name: "{{GUID}}-HostSG"
+    image: "{{ _server_image | default('rhel-8.3') }}"
+    openstack_cloud: "{{GUID}}-project"
+    flavor: GLOBAL-CPU_4_Memory_32768_Disk_60_flavor
+    key_name: "{{GUID}}-keypair"
+    network: "{{GUID}}-prod-network"
